@@ -1,20 +1,22 @@
 import './App.css';
 import {BoardColumn} from "./BoardColumnComponents/BoardColumn";
-import boardData from "./board-data.js";
+import boardColumnsData from "./board-data.js";
+import {Board} from "./BoardComponents/Board";
 
 function App() {
-    const boards = boardData.map((board) =>
-        <BoardColumn
-            key={board.id}
-            tasks={board.tasks}
-            name={board.name}
-        />
-    );
+    // const boards = boardData.map((board) =>
+    //     <BoardColumn
+    //         key={board.id}
+    //         tasks={board.tasks}
+    //         name={board.name}
+    //     />
+    // );
 
     return (
-        <div>
-            {boards}
-        </div>
+        <Board
+            name="My board"
+            columns={boardColumnsData}
+        />
     );
 }
 

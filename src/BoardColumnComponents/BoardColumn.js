@@ -1,5 +1,6 @@
 import {BoardTask} from "./BoardTask";
 import {BoardColumnHeader} from "./BoardColumnHeader";
+import {BoardAddTaskButton} from "./BoardAddTaskButton";
 
 export const BoardColumn = (props) => {
     const tasks = props.tasks;
@@ -10,12 +11,14 @@ export const BoardColumn = (props) => {
         />
     );
     return (
-        <div className="board-column">
+        <div className="board__board-column board-column">
             <BoardColumnHeader name={props.name}/>
 
             <div className="board_column__body">
                 {columnTasks}
             </div>
+
+            <BoardAddTaskButton/>
         </div>
     );
 }
