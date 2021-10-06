@@ -42,9 +42,30 @@ html,
     border-bottom: 1px solid white;
     padding: 10px 40px;
 }
+.board__edit-icon{
+    fill: #595959;
+    margin: 0 5px;
+}
+.board__edit-icon > svg{
+    cursor: pointer;
+    fill: #505050;
+}
+.board__edit-icon:hover > svg{
+    fill: black;
+}
 .board__name {
     font-size: 1.4em;
     font-weight: bold;
+    border-bottom: 1px solid transparent;
+}
+[contenteditable]:active,
+[contenteditable]:focus{
+    border:none;
+    outline:none;
+}
+.board__name[contenteditable="true"]:active,
+.board__name[contenteditable="true"]:focus{
+    border-bottom: 1px solid black;
 }
 .board__body {
     display: flex;
