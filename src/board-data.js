@@ -5,11 +5,11 @@ export default [
         tasks: [
             {
                 id: 0,
-                description: 'Make Misha laugh :)'
+                description: 'Make somebody laugh :)'
             },
             {
                 id: 1,
-                description: 'Dance ketchup dance!'
+                description: 'Dance funny dance!'
             },
             {
                 id: 2,
