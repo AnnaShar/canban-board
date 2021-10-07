@@ -18,17 +18,17 @@ export const BoardColumn = (props) => {
     const Search = ({query}) => <li>{query}</li>
 
     const handleClick = () => {
-        if(newTaskName.length>0) {
+        if (newTaskName.length > 0) {
             setNewTasks(searches => searches.concat(newTaskName));
             inputTaskName.current.value = '';
             setNewTaskName('');
         }
     }
-    const updateQuery = ({ target }) => {
+    const updateQuery = ({target}) => {
         setNewTaskName(target.value);
     }
 
-    const keyPressed = ({ key }) => {
+    const keyPressed = ({key}) => {
         if (key === "Enter") {
             handleClick()
         }
@@ -48,7 +48,7 @@ export const BoardColumn = (props) => {
 
                 {newTasks && newTasks.map((name, i) => (
                     <BoardTask
-                        key={name+i}
+                        key={name + i}
                         task={name}
                     />
                 ))}
@@ -58,16 +58,14 @@ export const BoardColumn = (props) => {
                 onClick={handleClick}
             />
             <form className="add-task-form" onSubmit={submitHandler}>
-                <div>
-                    <input
-                        ref={inputTaskName}
-                        className="add-task-form__input"
-                        placeholder="Task name"
-                        type="text"
-                        onChange={updateQuery}
-                        onKeyPress={keyPressed}
-                    />
-                </div>
+                <input
+                    ref={inputTaskName}
+                    className="add-task-form__input"
+                    placeholder="Task name"
+                    type="text"
+                    onChange={updateQuery}
+                    onKeyPress={keyPressed}
+                />
             </form>
         </div>
     );
