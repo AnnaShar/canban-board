@@ -2,37 +2,73 @@ import {BoardTask} from "./BoardTask";
 import {BoardColumnHeader} from "./BoardColumnHeader";
 import {BoardAddTaskButton} from "./BoardAddTaskButton";
 import {ModalWindow} from "../ModalWindowComponents/ModalWindow"
-import React, {useState} from 'react';
+import React, {useState, useEffect, useRef} from 'react';
 
 export const BoardColumn = (props) => {
-    const [tasks, setTasks] = useState(props.tasks);
-    const columnTasks = tasks.map(task =>
+    const inputTaskName = useRef(null);
+    const columnTasks = props.tasks.map(task =>
         <BoardTask
             key={task.id}
             task={task.description}
         />
     );
-    const addTask = (e) => {
-        let newTasks = tasks;
-        newTasks.push(
-            <BoardTask
-                key={10}
-                task="Untitled"
-            />
-        )
-        setTasks(newTasks);
+
+    const [newTasks, setNewTasks] = useState([])
+    const [newTaskName, setNewTaskName] = useState("")
+    const Search = ({query}) => <li>{query}</li>
+
+    const handleClick = () => {
+        if(newTaskName.length>0) {
+            setNewTasks(searches => searches.concat(newTaskName));
+            inputTaskName.current.value = '';
+            setNewTaskName('');
+        }
     }
+    const updateQuery = ({ target }) => {
+        setNewTaskName(target.value);
+    }
+
+    const keyPressed = ({ key }) => {
+        if (key === "Enter") {
+            handleClick()
+        }
+    }
+
+    const submitHandler = e => {
+        // Prevent form submission on Enter key
+        e.preventDefault()
+    }
+
     return (
         <div className="board__board-column board-column">
             <BoardColumnHeader name={props.name}/>
 
             <div className="board_column__body">
                 {columnTasks}
+
+                {newTasks && newTasks.map((name, i) => (
+                    <BoardTask
+                        key={name+i}
+                        task={name}
+                    />
+                ))}
             </div>
 
             <BoardAddTaskButton
-                onClick={addTask}
+                onClick={handleClick}
             />
+            <form className="add-task-form" onSubmit={submitHandler}>
+                <div>
+                    <input
+                        ref={inputTaskName}
+                        className="add-task-form__input"
+                        placeholder="Task name"
+                        type="text"
+                        onChange={updateQuery}
+                        onKeyPress={keyPressed}
+                    />
+                </div>
+            </form>
         </div>
     );
 }
